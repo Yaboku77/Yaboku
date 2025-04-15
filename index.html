@@ -1,121 +1,312 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Maheshwari - Web Developer</title>
 
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-	
+    <script src="https://cdn.tailwindcss.com"></script>
 
-	<head>
-	<title>The RAHul</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com/">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            overflow-x: hidden;
+        }
 
-  <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="icon" href="img/icon.jpg" type="image/x-icon">
+        .hero-bg {
+            background-image: url('https://raw.githubusercontent.com/Yaboku77/Yaboku/refs/heads/main/img/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .btn-gradient {
+            background-image: linear-gradient(to right, #8A2BE2, #4169E1);
+            transition: background-image 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background-image: linear-gradient(to right, #7B24CB, #3A5CC7);
+        }
+
+         #menu-button span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #ffffff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        /* Contact Section Styling & Animation */
+        #contact-section {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transform: translateY(100%); /* Start below viewport */
+        }
+        body.contact-visible #contact-section {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0%); /* Slide into view */
+        }
+
+        /* Hide main content when contact section is visible */
+        body.contact-visible > header,
+        body.contact-visible > main,
+        body.contact-visible > footer#footer { /* Be specific with footer ID */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        body > header,
+        body > main,
+        body > footer#footer {
+             opacity: 1;
+             pointer-events: auto;
+             transition: opacity 0.3s ease-in-out 0.1s; /* Delay fade-in slightly */
+        }
+
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-text-1 { animation: fadeInUp 0.8s ease-out 0.2s backwards; }
+        .hero-text-2 { animation: fadeInUp 0.8s ease-out 0.4s backwards; }
+        .hero-text-3 { animation: fadeInUp 0.8s ease-out 0.6s backwards; }
+
+        .network-card {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .network-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-svg-icon {
+             width: 1.8rem;
+             height: 1.8rem;
+             border-radius: 9999px;
+             display: inline-block;
+             vertical-align: middle;
+             filter: grayscale(100%);
+             transition: filter 0.3s ease;
+        }
+        .social-svg-icon:hover {
+             filter: grayscale(0%);
+        }
+
+        .form-input {
+            background-color: #2d2d2d;
+            border: 1px solid #4a4a4a;
+            color: #ffffff;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #4169E1;
+            box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.5);
+        }
+
+    </style>
 </head>
-<body>
-	<!----hero Section start---->
+<body class="bg-gray-900 text-white">
 
-	<div class="hero">
-		<nav class="navbar h-nav-resp">
-			<h2 class="logo">RAH<span>uL</span></h2>
-			<ul class="navlist v-class-resp">
-				<li><a href="#">Home</a></li>
-				<li><a href="#networks">Services</a></li>
-				<li><a href="https://t.me/BondGreninjaToons">Contact Us</a></li>
-			</ul>
-		</nav>>
-		<div class="burger">
-			<div class="line"></div>
-			<div class="line"></div>
-			<div class="line"></div>
-		</div>
+    <header class="absolute top-0 left-0 right-0 z-30 py-4 px-6 md:px-10">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wider text-white">
+                <span>RAH</span><span class="text-pink-400">uL</span>
+            </a>
+            <button id="menu-button" class="md:hidden focus:outline-none">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="hidden md:flex space-x-6">
+            </div>
+        </nav>
+    </header>
 
-		<div class="content">
-			<h4>Hello, my name is</h4>
-			<h1>Rahul <span>Maheshwari</span></h1>
-			<h3>I'am a Web Developer & PiRATE.</h3>
-		</div>
-	</div>
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex flex-col items-center justify-center space-y-6 text-xl opacity-0 translate-x-full pointer-events-none">
+        <button id="close-menu-button" class="absolute top-6 right-6 text-3xl">&times;</button>
+        <a href="#hero" class="hover:text-indigo-400 menu-link">Home</a>
+        <a href="#networks" class="hover:text-indigo-400 menu-link">Networks</a>
+        <a href="#footer" class="hover:text-indigo-400 menu-link">About</a>
+        <a href="#" id="contact-menu-link" class="hover:text-indigo-400">Contact</a>
+    </div>
 
+    <main>
+        <section id="hero" class="relative hero-bg h-screen flex items-center justify-center text-center text-white px-4 overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="relative z-10">
+                <p class="text-lg md:text-xl mb-2 font-light hero-text-1">Hello, my name is</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-3 leading-tight hero-text-2">
+                    <span>Rahul</span> <span class="text-pink-400">Maheshwari</span>
+                </h1>
+                <p class="text-xl md:text-2xl font-light hero-text-3">I'am a Web Developer & <span class="font-semibold">PIRATE</span> .</p>
+            </div>
+        </section>
 
-	<!-----service section start----------->
-	<div class="service">
-		<div class="title" id="networks">
-			<h2>Our Networks</h2>
-		</div>
+        <section id="networks" class="py-16 md:py-24 bg-[#121212]">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 animate-on-scroll">Our Networks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="network-card bg-[#1E1E1E] p-8 rounded-xl shadow-lg flex flex-col items-center animate-on-scroll delay-1">
+                        <i class="fab fa-telegram text-4xl mb-4 text-blue-400"></i>
+                        <h3 class="text-xl font-semibold mb-2">Telegram</h3>
+                        <p class="text-gray-400 mb-6 text-sm flex-grow">More Than 1k Community On Telegram</p>
+                        <a href="#" class="btn-gradient text-white font-medium py-2 px-6 rounded-lg transition duration-300 w-full text-center">Join Us</a>
+                    </div>
+                    <div class="network-card bg-[#1E1E1E] p-8 rounded-xl shadow-lg flex flex-col items-center animate-on-scroll delay-2">
+                        <i class="fas fa-tv text-4xl mb-4 text-purple-400"></i>
+                        <h3 class="text-xl font-semibold mb-2">BGT</h3>
+                        <p class="text-gray-400 mb-6 text-sm flex-grow">Visit our site for exclusive anime and cartoon shows in Hindi, English and more :)</p>
+                        <a href="#" class="btn-gradient text-white font-medium py-2 px-6 rounded-lg transition duration-300 w-full text-center">Check Out</a>
+                    </div>
+                    <div class="network-card bg-[#1E1E1E] p-8 rounded-xl shadow-lg flex flex-col items-center animate-on-scroll delay-3">
+                        <i class="fab fa-youtube text-4xl mb-4 text-red-500"></i>
+                        <h3 class="text-xl font-semibold mb-2">YouTube</h3>
+                        <p class="text-gray-400 mb-6 text-sm flex-grow">Our YouTube channel</p>
+                        <a href="#" class="btn-gradient text-white font-medium py-2 px-6 rounded-lg transition duration-300 w-full text-center">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-		<div class="box">
-			<div class="card">
-					<img src="img/telegram.png" id="telegramimg">
-				<h5>Telegram</h5>
-				<div class="pra">
-					<p>More Than 1k+ Community On Telegram</p>
-	
-					<p style="text-align: center;">
-						<a class="button" href="https://t.me/BondGreninjaToons" target="_blank">Join Us</a>
-					</p>
-				</div>
-			</div>
-
-			<div class="card">
-				<img src="img/BGT.png" id="nyaaimg">
-				<h5 id="bgt">BGT</h5>
-				<div class="pra">
-					<p>Visit our site for exclusive anime and cartoon shows in Hindi, English and more :)
-						
-						
-					</p>
-	
-					<p style="text-align: center;">
-						<a class="button" href="https://www.bondgreninjatoons.fun" target="_blank">Check Out</a>
-					</p>
-				</div>
-			</div>
-
-			<div class="card">
-				<img src="img/youtube.png" id="youtubeimg">
-				<h5>YouTube</h5>
-				<div class="pra">
-					<p>Our YouTube channel</p>
-	
-					<p style="text-align: center;">
-						<a class="button" href="https://youtube.com/c/BondGreninjaYT" target="_blank">Check
-							Out</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!------Contact Me------>
-	<!-- <div class="contact-me" id="contact">
-		<p>Let Me Get You A Beautiful Website.</p>
-		<a class="button-two" href="#">Hire Me</a>
-	</div> -->
-
-	<!------footer start--------->
-	<footer id="footer">
-        <p>Rahul Maheshwari</p>
-        <p>To Know More About Us Follow Us On Our Social Media</p>
-        <div class="social">
-            <a href="https://t.me/BondGreninjaToons" id="telegram-henil" target="_blank"><img src="img/telegram.svg" alt="nyaa icon"
-                    id="telegram"></a>
-            <a href="https://github.com/Yaboku777" id="github-henil" target="_blank"><img src="img/github.svg" alt="nyaa icon"
-                    id="github"></a>
-            <a href="https://youtube.com/c/BondGreninjaYT" id="BGT" target="_blank"><img src="img/youtube.svg" alt="nyaa icon"
-                    id="youtube"></a>
-            <a href="https://www.bondgreninjatoons.fun" target="_blank"><i style="background=#000"><img src="img/nyaa.svg" alt="nyaa icon"
-                    id="nyaa"></i></a>
+    <footer id="footer" class="bg-[#121212] py-12">
+        <div class="container mx-auto px-6 text-center text-gray-400 animate-on-scroll">
+            <h3 class="text-2xl font-semibold text-white mb-3">Rahul Maheshwari</h3>
+            <p class="mb-6">To Know More About Us Follow Us On Our Social Media</p>
+            <div class="flex justify-center items-center space-x-6 mb-8">
+                <a href="#" aria-label="Telegram" class="text-2xl hover:text-blue-400 transition duration-300"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="YouTube" class="text-2xl hover:text-red-500 transition duration-300"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Custom Social Link" class="text-gray-400 transition duration-300"><img src="https://raw.githubusercontent.com/Yaboku77/Yaboku/refs/heads/main/img/BMh5hxtm.svg" alt="Custom Link" class="social-svg-icon"></a>
+            </div>
+            <p class="text-sm">&copy; <span id="current-year"></span> CopyRight By Rahul</p>
         </div>
-
-
-        <p class="end">CopyRight &copy; By Rahul</p>
     </footer>
-	<script src="js/resp.js"></script>
+
+    <section id="contact-section" class="fixed inset-0 z-40 flex items-center justify-center bg-gray-900 p-4 opacity-0 pointer-events-none">
+         <button id="close-contact-button" class="absolute top-6 right-6 text-gray-400 hover:text-white text-4xl font-light z-50">&times;</button>
+        <div class="max-w-lg w-full">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white">Contact Us</h2>
+            <form action="#" method="POST" class="space-y-5">
+                <div>
+                    <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                    <input type="text" name="name" id="contact-name" required class="form-input">
+                </div>
+                <div>
+                    <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                    <input type="email" name="email" id="contact-email" required class="form-input">
+                </div>
+                <div>
+                    <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                    <textarea name="message" id="contact-message" rows="5" required class="form-input"></textarea>
+                </div>
+                <div class="pt-3">
+                    <button type="submit" disabled class="w-full btn-gradient text-white font-semibold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+                        Send Message (Disabled)
+                    </button>
+                     <p class="text-xs text-gray-500 mt-2 text-center">Note: Form submission requires server-side code.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const menuLinks = mobileMenu.querySelectorAll('.menu-link');
+        const contactMenuLink = document.getElementById('contact-menu-link');
+        const contactSection = document.getElementById('contact-section');
+        const closeContactButton = document.getElementById('close-contact-button');
+        const bodyElement = document.body;
+
+        function openMenu() {
+            mobileMenu.classList.remove('opacity-0', 'translate-x-full', 'pointer-events-none');
+            mobileMenu.classList.add('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('opacity-0', 'translate-x-full', 'pointer-events-none');
+            mobileMenu.classList.remove('opacity-100', 'translate-x-0', 'pointer-events-auto');
+        }
+
+        function showContactSection() {
+             bodyElement.classList.add('contact-visible');
+        }
+
+        function hideContactSection() {
+             bodyElement.classList.remove('contact-visible');
+        }
+
+        menuButton.addEventListener('click', openMenu);
+        closeMenuButton.addEventListener('click', closeMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        contactMenuLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            closeMenu();
+            setTimeout(showContactSection, 50);
+        });
+
+        closeContactButton.addEventListener('click', hideContactSection);
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+
 </body>
-
-
 </html>
