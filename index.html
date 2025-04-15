@@ -49,21 +49,19 @@
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
-        /* Contact Section Styling & Animation */
         #contact-section {
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            transform: translateY(100%); /* Start below viewport */
+            transform: translateY(100%);
         }
         body.contact-visible #contact-section {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(0%); /* Slide into view */
+            transform: translateY(0%);
         }
 
-        /* Hide main content when contact section is visible */
         body.contact-visible > header,
         body.contact-visible > main,
-        body.contact-visible > footer#footer { /* Be specific with footer ID */
+        body.contact-visible > footer#footer {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease-in-out;
@@ -73,7 +71,7 @@
         body > footer#footer {
              opacity: 1;
              pointer-events: auto;
-             transition: opacity 0.3s ease-in-out 0.1s; /* Delay fade-in slightly */
+             transition: opacity 0.3s ease-in-out 0.1s;
         }
 
 
@@ -113,8 +111,8 @@
         }
 
         .social-svg-icon {
-             width: 1.8rem;
-             height: 1.8rem;
+             width: 1.5rem;
+             height: 1.5rem;
              border-radius: 9999px;
              display: inline-block;
              vertical-align: middle;
@@ -149,12 +147,18 @@
             <a href="#" class="text-2xl font-bold tracking-wider text-white">
                 <span>RAH</span><span class="text-pink-400">uL</span>
             </a>
+
             <button id="menu-button" class="md:hidden focus:outline-none">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <div class="hidden md:flex space-x-6">
+
+            <div class="hidden md:flex space-x-6 items-center">
+                 <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+                 <a href="#networks" class="text-gray-300 hover:text-white transition duration-300">Networks</a>
+                 <a href="#footer" class="text-gray-300 hover:text-white transition duration-300">About</a>
+                 <a href="#" id="contact-desktop-link" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
             </div>
         </nav>
     </header>
@@ -253,6 +257,7 @@
         const closeMenuButton = document.getElementById('close-menu-button');
         const menuLinks = mobileMenu.querySelectorAll('.menu-link');
         const contactMenuLink = document.getElementById('contact-menu-link');
+        const contactDesktopLink = document.getElementById('contact-desktop-link'); // Added desktop link
         const contactSection = document.getElementById('contact-section');
         const closeContactButton = document.getElementById('close-contact-button');
         const bodyElement = document.body;
@@ -286,6 +291,12 @@
             event.preventDefault();
             closeMenu();
             setTimeout(showContactSection, 50);
+        });
+
+        // Added listener for desktop contact link
+        contactDesktopLink.addEventListener('click', (event) => {
+             event.preventDefault();
+             showContactSection();
         });
 
         closeContactButton.addEventListener('click', hideContactSection);
